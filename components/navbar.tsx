@@ -43,17 +43,17 @@ export default function Navbar({ cartCount = 0 }: { cartCount?: number }) {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
-        isScrolled ? "bg-white/80 backdrop-blur-md shadow-lg" : pathname === "/" ? "bg-transparent" : "bg-black",
+        "fixed left-0 right-0 z-50 transition-all duration-300 ease-in-out mx-10 rounded-full px-3",
+        isScrolled ? "bg-white/40 backdrop-blur-md shadow-lg top-3" : pathname === "/" ? "bg-white/40 top-7" : "bg-black  top-7",
       )}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4">
+      <div className="max-w-7xl mx-auto px-6 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <button onClick={() => handleNavigation("/")} className="flex items-center space-x-2 group">
             <div className="relative w-40 h-10 transition-transform duration-300 group-hover:scale-105">
               <Image
-                src="/images/smellora-logo.png"
+                src="/assets/borus.png"
                 alt="Smellora - Signature of Fragrance"
                 fill
                 className="object-contain"
@@ -69,42 +69,32 @@ export default function Navbar({ cartCount = 0 }: { cartCount?: number }) {
                 key={item.href}
                 onClick={() => handleNavigation(item.href)}
                 className={cn(
-                  "relative transition-all duration-300 ease-in-out hover:scale-105",
-                  pathname === item.href
-                    ? isScrolled || pathname !== "/"
-                      ? "text-pink-600 font-semibold"
-                      : "text-yellow-400 font-semibold"
-                    : isScrolled || pathname !== "/"
-                      ? "text-gray-700 hover:text-pink-600"
-                      : "text-white hover:text-yellow-400",
+                  "relative transition-all duration-300 ease-in-out hover:scale-105 text-white font-light",
+                  pathname === item.href && "rounded-full border px-4 py-1"
                 )}
               >
                 {item.label}
-                {pathname === item.href && (
-                  <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-pink-600 animate-in slide-in-from-left duration-300" />
-                )}
               </button>
             ))}
           </div>
 
           {/* Cart Button */}
-          <button onClick={() => handleNavigation("/cart")}>
-            <Button
-              variant="ghost"
-              size="icon"
-              className={cn(
-                "relative transition-all duration-300 hover:scale-110",
-                isScrolled || pathname !== "/"
-                  ? "text-gray-700 hover:bg-pink-50 hover:text-pink-600"
-                  : "text-white hover:bg-white/20",
-              )}
-            >
-              <ShoppingCart className="w-5 h-5" />
-              <Badge className="absolute -top-2 -right-2 w-5 h-5 p-0 bg-pink-600 text-white text-xs flex items-center justify-center animate-pulse">
-                {cartCount}
-              </Badge>
-            </Button>
-          </button>
+          <div className="relative">
+            <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center">
+              <button onClick={() => handleNavigation("/cart")}>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="relative transition-all duration-300 hover:scale-110 text-white"
+                >
+                  <ShoppingCart className="w-5 h-5" />
+                  <Badge className="absolute -top-2 -right-2 w-5 h-5 p-0 bg-green-500/90 text-white text-xs flex items-center justify-center">
+                    {cartCount}
+                  </Badge>
+                </Button>
+              </button>
+            </div>
+          </div>
 
           {/* Mobile Menu Button */}
           <Button
@@ -129,12 +119,8 @@ export default function Navbar({ cartCount = 0 }: { cartCount?: number }) {
                   key={item.href}
                   onClick={() => handleNavigation(item.href)}
                   className={cn(
-                    "text-left transition-colors duration-300",
-                    pathname === item.href
-                      ? "text-pink-600 font-semibold"
-                      : isScrolled || pathname !== "/"
-                        ? "text-gray-700 hover:text-pink-600"
-                        : "text-white hover:text-yellow-400",
+                    "text-left transition-colors duration-300 text-white font-light",
+                    pathname === item.href && "rounded-full bg-white px-4 py-1"
                   )}
                 >
                   {item.label}
